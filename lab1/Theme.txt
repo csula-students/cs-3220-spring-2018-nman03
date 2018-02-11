@@ -1,0 +1,16 @@
+Theme:
+Dungeon Runner
+
+Resource:
+Gold(from Loot)
+
+Generators:
+* Cursor
+* Adventurer
+* Raid Team
+* Dungeon Champion
+
+Story:
+* Need Gold? Click the button to look for loot and earn gold.
+* You've made a name as a veteran dungeoneer.
+* You've hired an Adveturer to do the looting for you.
