@@ -10,8 +10,7 @@
 		<header>
 			<h1>Dungeon Runner</h1>
 		</header>
-
-		<component-example></component-example>
+		
 		<script src="dest/app.bundle.js"></script>
 		
 		<main>
@@ -25,33 +24,24 @@
 			<button class="clicker">Look For Loot</button>
 
 			<div class="container">
-				<div class="generators">
+				<game-generator data-id="0">
 					<p class="generator-name">Adventurer<span class="generator-count">1</span></p>
 					<p class="generator-description">This Solo Adventurer will be able to earn enough 10 gold per minute</p> 
 					<span class="rate">10/60</span><button>1,000 Gold</button>
-				</div>
-				<div class="generators">
+				</game-generator>
+				<game-generator data-id="1">
 					<p class="generator-name">Raid Team<span class="generator-count">0</span></p>
 					<p class="generator-description">This team of experienced fighters will be able to amass enough 100 gold per minute</p>
 					<span class="rate">100/60</span><button>10,000 Gold</button>
-				</div>
-				<div class="generators">
+				</game-generator>
+				<game-generator data-id="2">
 					<p class="generator-name">Dungeon Champion<span class="generator-count">0</span></p>
 					<p class="generator-description">This OP character can defeat several bosses per run without using a single HP potion, allowing him to earn 600 gold per minute</p>
-
 					<span class="rate">600/60</span><button>50,000 Gold</button>
-				</div>
+				</game-generator>
 			</div>
 		</main>
 
-		<script>
-		    window.incrementalGame = {
-		        state: {
-		            counter: 0
-		          
-		        }
-		    }		    
-		</script>
 		
 		<script src="app.js"></script>
 

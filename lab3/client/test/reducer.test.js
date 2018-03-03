@@ -5,7 +5,7 @@ import * as mock from './mock';
 
 test('should be able to set example state from "EXAMPLE_MUTATION" action', () => {
 	const action = {
-		type: constants.EXAMPLE,
+		type: constants.actions.EXAMPLE,
 		payload: 'mutated'
 	};
 	const initialState = {
@@ -31,5 +31,5 @@ test('should be able to muate resource and generators on "BUY_GENERATOR" action'
 		counter: 0,
 		generators: [ Object.assign({}, mock.generator, {quantity: 1}) ]
 	};
-	expect(reducer(initialState, action)).toBe(expected);
+	expect(reducer(initialState, action)).toEqual(expected);
 });

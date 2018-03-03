@@ -46,7 +46,7 @@ button:hover {
 	justify-content: center;
 }
 
-.generators {
+game-generator {
 	border: 1px solid black;
 	max-width: 15em;
 	margin: 1em;
