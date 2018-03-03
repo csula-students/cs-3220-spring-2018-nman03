@@ -736,6 +736,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = reducer;
 function reducer(state, action) {
 	switch (action.type) {
+		case 'BUY_GENERATOR':
+			state.quantity += 1;
+			state.counter -= state.unlockValue;
+			return state;
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
@@ -872,10 +876,27 @@ exports.default = function (store) {
 
 			// TODO: render generator initial view
 
+
 			// TODO: subscribe to store on change event
+			this.onStateChange = this.handleStateChange.bind(this);
 
 			// TODO: add click event
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'BUY_GENERATOR'
+				});
+			});
 		}
+
+		handleStateChange(newState) {
+			this.store.state.quantity = newState.quantity;
+			this.store.state.counter = newState.counter;
+		}
+
+		connectedCallBack() {
+			this.store.subscribe(this.onStateChange);
+		}
+
 	};
 };
 

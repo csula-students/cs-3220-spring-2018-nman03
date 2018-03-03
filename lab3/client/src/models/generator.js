@@ -28,7 +28,10 @@ export default class Generator {
 	 */
 	getCost () {
 		// TODO: implement the function according to doc above
-		return this.baseCost * (Math.pow((1 + growthRatio), this.quantity));
+		var factor = Math.pow(10, 2);
+
+		return Math.round((this.baseCost * 
+			(Math.pow((1 + constants.growthRatio), this.quantity))) * factor) / factor;
 	}
 
 	/**
