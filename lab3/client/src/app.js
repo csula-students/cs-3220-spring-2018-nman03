@@ -77,7 +77,37 @@ function main () {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: [
+			{
+				type: 'autonomous',
+				name: 'Adventurer',
+				description: 'This Solo Adventurer will be able to earn enough 1 gold per minute',
+				rate: 1,
+				baseCost: 10,
+				quantity: 0,
+				unlockValue: 10
+
+			},
+			{
+				type: 'autonomous',
+				name: 'Raid Team',
+				description: 'This team of experienced fighters will be able to amass 10 gold per minute',
+				rate: 10,
+				baseCost: 100,
+				quantity: 0,
+				unlockValue: 100
+
+			},
+			{
+				type: 'autonomous',
+				name: 'Dungeon Champion',
+				description: 'This OP character can defeat several bosses per run without using a single HP potion, allowing him to earn 100 gold per minute',
+				rate: 100,
+				baseCost: 1000,
+				quantity: 0,
+				unlockValue: 1000
+
+			}],
 		story: []
 	};
 

@@ -171,7 +171,34 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: [{
+			type: 'autonomous',
+			name: 'Adventurer',
+			description: 'This Solo Adventurer will be able to earn enough 1 gold per minute',
+			rate: 1,
+			baseCost: 10,
+			quantity: 0,
+			unlockValue: 10
+
+		}, {
+			type: 'autonomous',
+			name: 'Raid Team',
+			description: 'This team of experienced fighters will be able to amass 10 gold per minute',
+			rate: 10,
+			baseCost: 100,
+			quantity: 0,
+			unlockValue: 100
+
+		}, {
+			type: 'autonomous',
+			name: 'Dungeon Champion',
+			description: 'This OP character can defeat several bosses per run without using a single HP potion, allowing him to earn 100 gold per minute',
+			rate: 100,
+			baseCost: 1000,
+			quantity: 0,
+			unlockValue: 1000
+
+		}],
 		story: []
 	};
 
@@ -737,8 +764,22 @@ exports.default = reducer;
 function reducer(state, action) {
 	switch (action.type) {
 		case 'BUY_GENERATOR':
-			state.quantity += 1;
-			state.counter -= state.unlockValue;
+			var index = -1;
+			for (var i = 0; i < state.generators.length; i++) {
+				if (state.generators[i].name == action.payload.name) {
+					index = i;
+				}
+			}
+			var generator = state.generators[index];
+			if (state.counter >= generator.unlockValue) {
+				state.counter = state.counter - generator.unlockValue;
+				state.generators[index].quantity++;
+			} else {
+				alert('Not Enough Gold');
+			}
+			return state;
+		case 'BUTTON-CLICK':
+			state.counter++;
 			return state;
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
@@ -765,11 +806,24 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 
-			this.onStateChange = this.handleStateChange.bind(this);
-
 			// TODO: add click event to increment counter
+
 			// hint: use "store.dispatch" method (see example component)
 		}
+
+		connectedCallback() {
+			this.innerHTML = '<button>Find Gold</button>';
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'BUTTON-CLICK'
+				});
+			});
+		}
+
+		disconnectedCallback() {
+			this.store.unsubscribe(this.onStateChange);
+		}
+
 	};
 };
 
@@ -797,9 +851,11 @@ exports.default = function (store) {
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
+			this.innerHTML = `Gold: ${newState.counter}`;
 		}
 
 		connectedCallback() {
+			this.innerHTML = 'Gold: 0';
 			this.store.subscribe(this.onStateChange);
 		}
 
@@ -879,22 +935,39 @@ exports.default = function (store) {
 
 			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
-
 			// TODO: add click event
-			this.addEventListener('click', () => {
-				this.store.dispatch({
-					type: 'BUY_GENERATOR'
-				});
-			});
+
 		}
 
 		handleStateChange(newState) {
-			this.store.state.quantity = newState.quantity;
-			this.store.state.counter = newState.counter;
+			this.innerHTML = `<p class="generator-name">${newState.generators[this.dataset.id].name}
+							  <span class="generator-count">${newState.generators[this.dataset.id].quantity}</span></p>
+							  <p>${newState.generators[this.dataset.id].description}</p>
+							  <span class="rate">${newState.generators[this.dataset.id].rate}/60</span>
+							  <button class="buy-button">${newState.generators[this.dataset.id].unlockValue} Gold</button>`;
 		}
 
-		connectedCallBack() {
+		connectedCallback() {
+			this.innerHTML = `<p class="generator-name">${store.state.generators[this.dataset.id].name}
+							  <span class="generator-count">${store.state.generators[this.dataset.id].quantity}</span></p>
+							  <p>${store.state.generators[this.dataset.id].description}</p>
+							  <span class="rate">${store.state.generators[this.dataset.id].rate}/60</span>
+							  <button class="buy-button">${store.state.generators[this.dataset.id].unlockValue} Gold</button>`;
+
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'BUY_GENERATOR',
+					payload: {
+						name: this.store.state.generators[this.dataset.id].name
+					}
+				});
+			});
+
 			this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback() {
+			this.store.unsubscribe(this.onStateChange);
 		}
 
 	};
