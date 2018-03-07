@@ -11,13 +11,12 @@ export default function reducer (state, action) {
 				}
 			}
 
-			var generator = state.generators[index];
+			const generator = new Generator(Object.assign({}, state.generators[index]));
+			var cost = Math.floor(generator.getCost());
 
-			if (state.counter >= generator.unlockValue) {
-				state.counter = state.counter - generator.unlockValue;
+			if (state.counter >= cost) {
+				state.counter = state.counter - cost;
 				state.generators[index].quantity ++;
-				const gen = new Generator(Object.assign({}, generator));
-				state.generators[index].unlockValue = Math.floor(gen.getCost());
 			} 
 			else {
 				alert('Not Enough Gold');

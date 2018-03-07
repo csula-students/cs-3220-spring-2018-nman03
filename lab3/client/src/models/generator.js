@@ -27,7 +27,6 @@ export default class Generator {
 	 * @return {number} the cost of buying another generator
 	 */
 	getCost () {
-		// TODO: implement the function according to doc above
 		var factor = Math.pow(10, 2);
 
 		return Math.round((this.baseCost * 
@@ -40,7 +39,6 @@ export default class Generator {
 	 * @return {number} how much this generator generates
 	 */
 	generate () {
-		// TODO: implement based on doc above
 		return this.rate * this.quantity;
 	}
 }

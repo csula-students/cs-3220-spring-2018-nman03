@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,15 +70,75 @@
 "use strict";
 
 
-__webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-var _game = __webpack_require__(4);
+var _constants = __webpack_require__(8);
 
-var _store = __webpack_require__(5);
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Generator {
+	/**
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
+	constructor(meta) {
+		this.type = meta.type;
+		this.name = meta.name;
+		this.description = meta.description;
+		this.rate = meta.rate;
+		this.quantity = meta.quantity;
+		this.baseCost = meta.baseCost;
+		this.unlockValue = meta.unlockValue;
+	}
+
+	/**
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
+	getCost() {
+		var factor = Math.pow(10, 2);
+
+		return Math.round(this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity) * factor) / factor;
+	}
+
+	/**
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
+	generate() {
+		return this.rate * this.quantity;
+	}
+}
+exports.default = Generator;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(2);
+
+var _game = __webpack_require__(5);
+
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _reducer = __webpack_require__(6);
+var _reducer = __webpack_require__(7);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
@@ -225,7 +285,7 @@ function main() {
 }
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -426,10 +486,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 var g;
@@ -456,7 +516,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -646,7 +706,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -680,7 +740,7 @@ function increment(state, modifier = 1) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -751,7 +811,7 @@ function deepCopy(obj) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -762,7 +822,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = reducer;
 
-var _generator = __webpack_require__(7);
+var _generator = __webpack_require__(0);
 
 var _generator2 = _interopRequireDefault(_generator);
 
@@ -779,13 +839,12 @@ function reducer(state, action) {
 				}
 			}
 
-			var generator = state.generators[index];
+			const generator = new _generator2.default(Object.assign({}, state.generators[index]));
+			var cost = Math.floor(generator.getCost());
 
-			if (state.counter >= generator.unlockValue) {
-				state.counter = state.counter - generator.unlockValue;
+			if (state.counter >= cost) {
+				state.counter = state.counter - cost;
 				state.generators[index].quantity++;
-				const gen = new _generator2.default(Object.assign({}, generator));
-				state.generators[index].unlockValue = Math.floor(gen.getCost());
 			} else {
 				alert('Not Enough Gold');
 			}
@@ -801,68 +860,6 @@ function reducer(state, action) {
 			return state;
 	}
 }
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _constants = __webpack_require__(8);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class Generator {
-	/**
-  * Create a new generator based on the meta object passing in
-  * @constructor
-  * @param {object} meta - meta object for constructing generator
-  */
-	constructor(meta) {
-		this.type = meta.type;
-		this.name = meta.name;
-		this.description = meta.description;
-		this.rate = meta.rate;
-		this.quantity = meta.quantity;
-		this.baseCost = meta.baseCost;
-		this.unlockValue = meta.unlockValue;
-	}
-
-	/**
-  * getCost computes cost exponentially based on quantity (as formula below)
-  * xt = x0(1 + r)^t
-  * which 
-  * xt is the value of x with t quantity
-  * x0 is base value
-  * r is growth ratio (see constants.growthRatio)
-  * t is the quantity
-  * @return {number} the cost of buying another generator
-  */
-	getCost() {
-		// TODO: implement the function according to doc above
-		var factor = Math.pow(10, 2);
-
-		return Math.round(this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity) * factor) / factor;
-	}
-
-	/**
-  * generate computes how much this type of generator generates -
-  * rate * quantity
-  * @return {number} how much this generator generates
-  */
-	generate() {
-		// TODO: implement based on doc above
-		return this.rate * this.quantity;
-	}
-}
-exports.default = Generator;
 
 /***/ }),
 /* 8 */
@@ -1023,35 +1020,33 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 
-			// TODO: render generator initial view
-
-
-			// TODO: subscribe to store on change event
 			this.onStateChange = this.handleStateChange.bind(this);
-			// TODO: add click event
-
 		}
 
 		handleStateChange(newState) {
-			this.innerHTML = `<p class="generator-name">${newState.generators[this.dataset.id].name}
-							  <span class="generator-count">${newState.generators[this.dataset.id].quantity}</span></p>
-							  <p>${newState.generators[this.dataset.id].description}</p>
-							  <span class="rate">${newState.generators[this.dataset.id].rate}/60</span>
-							  <button class="buy-button">${newState.generators[this.dataset.id].unlockValue} Gold</button>`;
+			const generator = new _generator2.default(Object.assign({}, newState.generators[this.dataset.id]));
+
+			this.innerHTML = `<p class="generator-name">${generator.name}
+							  <span class="generator-count">${generator.quantity}</span></p>
+							  <p>${generator.description}</p>
+							  <span class="rate">${generator.rate}/60</span>
+							  <button class="buy-button">${Math.floor(generator.getCost())} Gold</button>`;
 		}
 
 		connectedCallback() {
-			this.innerHTML = `<p class="generator-name">${store.state.generators[this.dataset.id].name}
-							  <span class="generator-count">${store.state.generators[this.dataset.id].quantity}</span></p>
-							  <p>${store.state.generators[this.dataset.id].description}</p>
-							  <span class="rate">${store.state.generators[this.dataset.id].rate}/60</span>
-							  <button class="buy-button">${store.state.generators[this.dataset.id].unlockValue} Gold</button>`;
+			const generator = new _generator2.default(Object.assign({}, store.state.generators[this.dataset.id]));
+
+			this.innerHTML = `<p class="generator-name">${generator.name}
+							  <span class="generator-count">${generator.quantity}</span></p>
+							  <p>${generator.description}</p>
+							  <span class="rate">${generator.rate}/60</span>
+							  <button class="buy-button">${Math.floor(generator.getCost())} Gold</button>`;
 
 			this.addEventListener('click', () => {
 				this.store.dispatch({
 					type: 'BUY_GENERATOR',
 					payload: {
-						name: this.store.state.generators[this.dataset.id].name
+						name: generator.name
 					}
 				});
 			});
@@ -1065,6 +1060,12 @@ exports.default = function (store) {
 
 	};
 };
+
+var _generator = __webpack_require__(0);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 13 */
