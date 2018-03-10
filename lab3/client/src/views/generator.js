@@ -16,7 +16,7 @@ export default function (store) {
 							  <span class="generator-count">${generator.quantity}</span></p>
 							  <p>${generator.description}</p>
 							  <span class="rate">${generator.rate}/60</span>
-							  <button class="buy-button">${Math.floor(generator.getCost())} Gold</button>`;
+							  <button class="buy-button">${Math.round(generator.getCost())} Gold</button>`;
 		}
 
 		connectedCallback() {
@@ -26,7 +26,7 @@ export default function (store) {
 							  <span class="generator-count">${generator.quantity}</span></p>
 							  <p>${generator.description}</p>
 							  <span class="rate">${generator.rate}/60</span>
-							  <button class="buy-button">${Math.floor(generator.getCost())} Gold</button>`;
+							  <button class="buy-button">${Math.round(generator.getCost())} Gold</button>`;
 
 			this.addEventListener('click', () => {
 				this.store.dispatch({
