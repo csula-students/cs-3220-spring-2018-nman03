@@ -1,15 +1,52 @@
+import Generator from '../models/generator';
+
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
 		constructor () {
 			super();
 			this.store = store;
 
-			// TODO: render generator initial view
-
-			// TODO: subscribe to store on change event
-
-			// TODO: add click event
-
+			this.onStateChange = this.handleStateChange.bind(this);			
 		}
+
+		handleStateChange(newState) {
+			const generator = new Generator(Object.assign({}, newState.generators[this.dataset.id]));
+
+			this.innerHTML = `<p class="generator-name">${generator.name}
+							  <span class="generator-count">${generator.quantity}</span></p>
+							  <p>${generator.description}</p>
+							  <span class="rate">${generator.rate}/60</span>
+							  <button class="buy-button">${Math.round(generator.getCost())} Gold</button>`;
+		}
+
+		connectedCallback() {
+			const generator = new Generator(Object.assign({}, store.state.generators[this.dataset.id]));
+
+			this.innerHTML = `<p class="generator-name">${generator.name}
+							  <span class="generator-count">${generator.quantity}</span></p>
+							  <p>${generator.description}</p>
+							  <span class="rate">${generator.rate}/60</span>
+							  <button class="buy-button">${Math.round(generator.getCost())} Gold</button>`;
+
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'BUY_GENERATOR',
+					payload: {
+						name: generator.name
+					}
+				});
+			});
+							
+            this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback () {
+			this.store.unsubscribe(this.onStateChange);
+		}
+
+
+
+
 	};
+
 }
