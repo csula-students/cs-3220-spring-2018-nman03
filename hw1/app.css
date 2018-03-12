@@ -1,0 +1,72 @@
+html {
+	font-family: 'Kavivanar', cursive;
+}
+
+h1 {
+	font-weight: bold;
+}
+
+button {
+    font-size: .8em;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: light gray;
+    transition: all ease .3s;
+    float: right;
+}
+
+button:hover {
+    color: white;
+    border: 2px solid white;
+    background-color: black;
+
+}
+
+.story {
+	color: white;
+	background-color: black;
+	margin-bottom: 1em;
+	max-height: 4em;
+	min-height: 4em;
+	overflow-y: auto;
+}
+
+.story > game-story-book > p {
+	margin: 0;
+	padding: 0;
+
+}
+
+.resource {
+	font-size: 1.3em;
+}
+
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+game-generator {
+	border: 1px solid black;
+	max-width: 15em;
+	margin: 1em;
+	padding: .5em;
+}
+
+.generator-name {
+	font-size: 1.2em;
+}
+
+.generator-count {
+	float: right;
+	font-size: .5em;
+}
+
+.rate {
+	font-size: .5em;
+}
+
+footer {
+	text-align: center;
+}
