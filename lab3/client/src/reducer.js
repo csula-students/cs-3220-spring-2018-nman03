@@ -12,7 +12,7 @@ export default function reducer (state, action) {
 			}
 
 			const generator = new Generator(Object.assign({}, state.generators[index]));
-			var cost = Math.round(generator.getCost());
+			var cost = Math.floor(generator.getCost());
 
 			if (state.counter >= cost) {
 				state.counter = state.counter - cost;
