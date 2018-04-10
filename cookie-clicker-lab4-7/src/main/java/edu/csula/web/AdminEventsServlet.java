@@ -24,12 +24,15 @@ public class AdminEventsServlet extends HttpServlet {
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
 		Collection<Event> events = dao.getAll();
 		System.out.println(events);
-		out.println("<h1>Hello events servlet!</h1>");
+		
+		String html = "<h1>Incremental Game Framework</h1>";
+		out.println(html);
 	}
 
 
 	@Override
 	public void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: handle upsert transaction
+		doGet(request, response);
 	}
 }
