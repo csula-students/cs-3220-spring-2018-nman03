@@ -80,7 +80,7 @@ public class EventsDAOImpl implements EventsDAO {
 	@Override
 	public void add(Event event) {
 		List<Event> list = getAll();
-		list.add(new Event(event.getId(), event.getName(), event.getDescription(), event.getTriggerAt()));
+		list.add(event);
 		
 		context.setAttribute(CONTEXT_NAME, list);
 	}

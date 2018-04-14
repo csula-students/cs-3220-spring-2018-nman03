@@ -33,10 +33,12 @@ input {
 	border: 2px solid black;
 }
 
-input.eventdescription {
-	width: 20em;;
+textarea {
+	width: 20em;
 	height: 15em;
 	box-sizing: border-box;
+	border: 2px solid black;
+	
 }
 
 button {
@@ -51,6 +53,11 @@ button {
 div.left {
 	margin-right: 10px;
 }
+
+table {
+	border-collapse: collapse;
+}
+
 
 table, th, td {
 	text-align: left;
