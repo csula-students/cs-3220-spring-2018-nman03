@@ -47,7 +47,7 @@ public class AdminEventsServlet extends HttpServlet {
 
 		if (request.getParameter("id") != null) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			html += "<input name='eventName' id='name' value='" + events.get(retrieveIndex(id)).getName() + "' type='text' /><br>";
+			html += "<input name='eventName' id='name' value=\"" + events.get(retrieveIndex(id)).getName() + "\" type='text' /><br>";
 		} 
 		else {
 			html += "<input name='eventName' id='name' type='text' /><br>";
@@ -83,7 +83,10 @@ public class AdminEventsServlet extends HttpServlet {
 			html += "<tr><td><div class='name'>" + e.getName() + "</div></td><td><div class='description'>" + e.getDescription() + "</div></td><td>" + e.getTriggerAt();
 			html += "</td><td><a href='events?id=" + e.getId() + "'>edit</a> | <a href='events?deleteId=" + e.getId() + "'>delete</a></td></tr>";
 		}
-
+		
+		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";
+		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";
+		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";		
 		html += "</table></div>";
 
 
