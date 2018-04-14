@@ -34,7 +34,7 @@ input {
 }
 
 textarea {
-	width: 20em;
+	width: 40em;
 	height: 15em;
 	box-sizing: border-box;
 	border: 2px solid black;
@@ -59,10 +59,28 @@ table {
 }
 
 
-table, th, td {
+table, td {
 	text-align: left;
 	padding: .5em;
 }
+
+
+div.name {
+	max-width: 15em;
+	max-height: 2em;
+	white-space: nowrap;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+}
+
+div.description {
+	max-width: 5em;
+	text-overflow: ellipsis;
+	max-height: 2em;
+	white-space: nowrap;
+  	overflow: hidden;
+}
+
 
 tr:nth-child(even) {
 	background-color: #fff;

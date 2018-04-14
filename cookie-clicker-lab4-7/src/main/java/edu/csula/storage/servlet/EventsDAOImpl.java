@@ -94,5 +94,7 @@ public class EventsDAOImpl implements EventsDAO {
 				list.remove(i);
 			}
 		}
+		
+		context.setAttribute(CONTEXT_NAME, list);
 	}
 }
