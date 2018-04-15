@@ -34,6 +34,13 @@ public class AdminEventsServlet extends HttpServlet {
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
 		ArrayList<Event> events = (ArrayList<Event>) dao.getAll();
 
+		request.setAttribute("events", events);
+
+		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
+
+
+
+		/*
 		System.out.println(events);
 		String html = "<link rel='stylesheet' type='text/css\' href='" + request.getContextPath() + "/app.css' />";
 		html += "<h1>Incremental Game Framework</h1>";
@@ -103,6 +110,7 @@ public class AdminEventsServlet extends HttpServlet {
 		}
 
 		out.println(html);
+		*/
 	}
 
 
