@@ -31,14 +31,21 @@ div.container {
 input {
 	padding: .5em;
 	border: 2px solid black;
+	margin: .5em;
 }
+
+
 
 textarea {
 	width: 40em;
 	height: 15em;
 	box-sizing: border-box;
 	border: 2px solid black;
-	
+	margin: .5em;
+}
+
+label {
+	margin: .5em;
 }
 
 button {
