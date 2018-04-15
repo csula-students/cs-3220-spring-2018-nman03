@@ -293,9 +293,7 @@ public final class admin_002devents_jsp extends org.apache.jasper.runtime.HttpJs
     int _jspx_eval_c_if_2 = _jspx_th_c_if_2.doStartTag();
     if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write(' ');
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${events.get(index).triggerAt}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write(' ');
         int evalDoAfterBody = _jspx_th_c_if_2.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;

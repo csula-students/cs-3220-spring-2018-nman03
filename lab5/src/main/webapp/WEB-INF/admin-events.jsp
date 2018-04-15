@@ -15,7 +15,7 @@
             <label for='description'>Event Description</label><br>
             <textarea name='eventDescription' type='text'><c:if test="${index != -1}"> ${events.get(index).description} </c:if></textarea><br>
             <label for='triggerAt'>Trigger At</label><br>
-            <input name='eventTriggerAt' id='triggerAt' value='<c:if test="${index != -1}"> ${events.get(index).triggerAt} </c:if>' type='text' /><br><button>Add | Edit</button></form>
+            <input name='eventTriggerAt' id='triggerAt' value='<c:if test="${index != -1}">${events.get(index).triggerAt}</c:if>' type='text' /><br><button>Add | Edit</button></form>
     </div>
     <table>
         <tr>
