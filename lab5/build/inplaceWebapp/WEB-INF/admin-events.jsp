@@ -11,7 +11,7 @@
     <div class='left'>
         <form method='POST'>
             <label for='name'>Event name</label><br>
-            <input name='eventName' id='name' value='<c:if test="${index != -1}"> ${events.get(index).name} </c:if>' type='text' /><br>
+            <input name='eventName' id='name' value="<c:if test='${index != -1}'> ${events.get(index).name} </c:if>" type='text' /><br>
             <label for='description'>Event Description</label><br>
             <textarea name='eventDescription' type='text'><c:if test="${index != -1}"> ${events.get(index).description} </c:if></textarea><br>
             <label for='triggerAt'>Trigger At</label><br>

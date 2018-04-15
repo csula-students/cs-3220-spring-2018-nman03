@@ -82,10 +82,10 @@ public final class admin_002devents_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("    <div class='left'>\n");
       out.write("        <form method='POST'>\n");
       out.write("            <label for='name'>Event name</label><br>\n");
-      out.write("            <input name='eventName' id='name' value='");
+      out.write("            <input name='eventName' id='name' value=\"");
       if (_jspx_meth_c_if_0(_jspx_page_context))
         return;
-      out.write("' type='text' /><br>\n");
+      out.write("\" type='text' /><br>\n");
       out.write("            <label for='description'>Event Description</label><br>\n");
       out.write("            <textarea name='eventDescription' type='text'>");
       if (_jspx_meth_c_if_1(_jspx_page_context))
