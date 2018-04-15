@@ -51,67 +51,6 @@ public class AdminEventsServlet extends HttpServlet {
 		}
 
 		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
-
-
-
-		/*
-		System.out.println(events);
-		String html = "<link rel='stylesheet' type='text/css\' href='" + request.getContextPath() + "/app.css' />";
-		html += "<h1>Incremental Game Framework</h1>";
-		html += "<ul>";
-		html +=  "<li><a href='" + request.getContextPath() + "/admin/'>Game Information</a></li>";
-		html += "<li ><a href='" + request.getContextPath() + "/admin/generators'>Generators</a></li>";
-		html += "<li ><a href='" + request.getContextPath() + "/admin/events'>Events</a></li>";
-		html += "</ul>";
-		html += "<div class='container'><div class='left'><form method='POST'>";
-		html += "<label for='name'>Event name</label><br>";
-
-		if (request.getParameter("id") != null) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			html += "<input name='eventName' id='name' value=\"" + events.get(retrieveIndex(id)).getName() + "\" type='text' /><br>";
-		} 
-		else {
-			html += "<input name='eventName' id='name' type='text' /><br>";
-		}
-
-		html += "<label for='description'>Event Description</label><br>";
-
-		if (request.getParameter("id") != null) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			html += "<textarea name='eventDescription' type='text'>" + events.get(retrieveIndex(id)).getDescription() + "</textarea><br>";
-		} 
-		else {
-			html += "<textarea name='eventDescription' type='text'></textarea><br>";
-		}
-
-		html += "<label for='triggerAt'>Trigger At</label><br>";
-
-		if (request.getParameter("id") != null) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			html += "<input name='eventTriggerAt' id='triggerAt' value='" + events.get(retrieveIndex(id)).getTriggerAt() + "' type='text' /><br>";
-		} 
-		else  {
-			html += "<input name='eventTriggerAt' id='triggerAt' type='text' /><br>";
-		}
-
-		html += "<button>Add | Edit</button>";
-		html += "</form></div>";
-
-		html += "<table>";
-		html += "<tr><td>Name</td><td>Description</td><td>Trigger At</td><td>Action</td></tr>";
-
-		for (Event e : events) {
-			html += "<tr><td><div class='name'>" + e.getName() + "</div></td><td><div class='description'>" + e.getDescription() + "</div></td><td>" + e.getTriggerAt();
-			html += "</td><td><a href='events?id=" + e.getId() + "'>edit</a> | <a href='events?deleteId=" + e.getId() + "'>delete</a></td></tr>";
-		}
-		
-		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";
-		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";
-		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";		
-		html += "</table></div>";
-	*/
-
-
 	
 	}
 
