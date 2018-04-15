@@ -20,7 +20,7 @@ public class AdminEventsServlet extends HttpServlet {
 	public void init() {
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
 		String sampleDesc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
-		dao.add(new Event(dao.getAll().size(), "Grandma shows up", sampleDesc, 10));
+		dao.add(new Event(dao.getAll().size(), "Grandma noows up", sampleDesc, 10));
 		dao.add(new Event(dao.getAll().size(), "You can create a factory now!", sampleDesc, 50));
 		dao.add(new Event(dao.getAll().size(), "We've found cookies in deep mounain ... in the mine?", sampleDesc, 200));
 
@@ -35,6 +35,20 @@ public class AdminEventsServlet extends HttpServlet {
 		ArrayList<Event> events = (ArrayList<Event>) dao.getAll();
 
 		request.setAttribute("events", events);
+
+		if (request.getParameter("deleteId") != null) {
+			int id = Integer.parseInt(request.getParameter("deleteId"));
+			Event event = null;
+
+			event = events.get(retrieveIndex(id));
+			
+
+			dao.remove(event.getId());
+
+			response.sendRedirect("events");
+
+			return;
+		}
 
 		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
 
@@ -95,22 +109,10 @@ public class AdminEventsServlet extends HttpServlet {
 		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";
 		html += "<tr><td><div class='name'></div></td><td><div class='description'></div></td><td></td><td></td></tr>";		
 		html += "</table></div>";
+	*/
 
 
-		if (request.getParameter("deleteId") != null) {
-			int id = Integer.parseInt(request.getParameter("deleteId"));
-			Event event = null;
-
-			event = events.get(retrieveIndex(id));
-			
-
-			dao.remove(event.getId());
-
-			response.sendRedirect("events");
-		}
-
-		out.println(html);
-		*/
+	
 	}
 
 
