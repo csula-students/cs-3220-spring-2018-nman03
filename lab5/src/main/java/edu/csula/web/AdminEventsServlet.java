@@ -36,6 +36,16 @@ public class AdminEventsServlet extends HttpServlet {
 
 		request.setAttribute("events", events);
 
+		String idStr = request.getParameter("id");
+		int index = -1;
+
+		if (idStr != null) {
+			index = retrieveIndex(Integer.parseInt(idStr));
+		}
+
+		request.setAttribute("index", index);
+
+
 		if (request.getParameter("deleteId") != null) {
 			int id = Integer.parseInt(request.getParameter("deleteId"));
 			Event event = null;
@@ -66,6 +76,7 @@ public class AdminEventsServlet extends HttpServlet {
 		String triggerAt = request.getParameter("eventTriggerAt");	
 
 		String idStr = request.getParameter("id");
+
 		Event event = null;
 
 		if (idStr != null) {
