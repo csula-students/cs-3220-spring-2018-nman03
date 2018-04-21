@@ -1,8 +1,8 @@
 package edu.csula.storage.servlet;
 
 import java.util.Collection;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -40,59 +40,28 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 
 	@Override
 	public List<Generator> getAll() {
-		Object data = context.getAttribute(CONTEXT_NAME);
-		if (data == null) {
-			return new ArrayList<>();
-		}
-
-		return (List<Generator>) data;
+		// TODO: get a list of generators from the context
+		return new ArrayList<>();
 	}
 
 	@Override
 	public Optional<Generator> getById(int id) {
-		List<Generator> list = getAll();
-
-		
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				return Optional.of(list.get(i));
-			}
-		}
-		
-
+		// TODO: get a certain generator from context
 		return Optional.empty();
 	}
 
 	@Override
 	public void set(int id, Generator generator) {
-		List<Generator> list = getAll();
-		
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				list.set(i, generator);
-			}
-		}
-		
-		context.setAttribute(CONTEXT_NAME, list);	
+		// TODO: change a certain generator from context
 	}
 
 	@Override
 	public void add(Generator generator) {
-		List<Generator> list = getAll();
-		list.add(generator);
-		
-		context.setAttribute(CONTEXT_NAME, list);
+		// TODO: add a new generator to the context
 	}
 
+	@Override
 	public void remove(int id) {
-		List<Generator> list = getAll();
-
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				list.remove(i);
-			}
-		}
-		
-		context.setAttribute(CONTEXT_NAME, list);
+		// TODO: remove a single generator from the context
 	}
 }

@@ -1,7 +1,6 @@
 package edu.csula.storage.servlet;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,61 +39,29 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public List<Event> getAll() {
-		Object data = context.getAttribute(CONTEXT_NAME);
-		if (data == null) {
-			return new ArrayList<>();
-		}
-
-		return (List<Event>) data;
+		// TODO: read a list of events from context
+		return new ArrayList<>();
 	}
 
 	@Override
 	public Optional<Event> getById(int id) {
 		// TODO: get a certain event given its id from context (see getAll() on
 		// getting a list first and get a certain one from the list)
-		List<Event> list = getAll();
-
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				return Optional.of(list.get(i));
-			}
-		}
 		return Optional.empty();
 	}
 
 	@Override
 	public void set(int id, Event event) {
-		List<Event> list = getAll();
-		
-		
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				list.set(i, event);
-			}
-		}
-		
-		context.setAttribute(CONTEXT_NAME, list);
-		
+		// TODO: set a certain event given id to be different from context
 	}
 
 	@Override
 	public void add(Event event) {
-		List<Event> list = getAll();
-		list.add(event);
-		
-		context.setAttribute(CONTEXT_NAME, list);
+		// TODO: add a new event to the context
 	}
 
 	@Override
 	public void remove(int id) {
-		List<Event> list = getAll();
-
-		for (int i = 0 ; i < list.size() ; i++) {
-			if (list.get(i).getId() == id) {
-				list.remove(i);
-			}
-		}
-		
-		context.setAttribute(CONTEXT_NAME, list);
+		// TODO: remove a single event given id
 	}
 }
