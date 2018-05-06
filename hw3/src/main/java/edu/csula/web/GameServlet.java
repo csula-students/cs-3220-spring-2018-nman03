@@ -33,16 +33,33 @@ public class GameServlet extends HttpServlet {
 		GeneratorsDAO gdao = new GeneratorsDAOImpl(getServletContext());
 		ArrayList<Generator> generators = (ArrayList<Generator>) gdao.getAll();
 
+		DTO dto = new DTO(generators, events);
+
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
-		String jsonString = gson.toJson(generators);
 
-		request.setAttribute("events", events);
+		String state = gson.toJson(dto);
 
-		request.setAttribute("generators", generators);
-
-		request.setAttribute("jsonString", jsonString);
+		request.setAttribute("state", state);
 
 		request.getRequestDispatcher("/WEB-INF/game.jsp").forward(request, response);
+	}
+
+	class DTO {
+		private ArrayList<Generator> generators;
+		private ArrayList<Event> events;
+
+		public DTO(ArrayList<Generator> generators, ArrayList<Event> events) {
+			this.generators = generators;
+			this.events = events;
+		}
+
+		public ArrayList<Generator> getGenerators() {
+			return this.generators;
+		}
+
+		public ArrayList<Event> getEvents() {
+			return this.events;
+		}
 	}
 }

@@ -1,47 +1,42 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Dungeon Crawler</title>
-	<link rel='stylesheet' type='text/css' href="<c:url value='/app.css' />" /></head>
+	<link href="app.css" rel="stylesheet" />
+</head>
 <body>
 	<header>
 		<h1>Dungeon Runner</h1>
 	</header>
+
 	
 	<main>
 		<div class="story">
-			<c:forEach items="${events}" var="event">
-				<p>${event.name}</p>
-			</c:forEach>
+			<p>Need Gold? Click the buttton to look for loot and earn Gold.</p>
+			<p>You've made a name for yourself as a veteran dungeoneer.</p>
+			<p>You've hired an Adventurer to do the looting for you.</p>
 		</div>
 
-		<label class="resource">Gold:<span id="resourceNum">0</span></label>
-		<button class="clicker">Look For Loot</button>
+		<ul></ul>
 
-		<div class="gen-container">
-			<c:forEach items="${generators}" var="generator">
-				<div class="generators">
-					<p class="generator-name">${generator.name}<span class="generator-count">0</span></p>
-					<p class="generator-description">${generator.description}</p> 
-					<span class="rate">${generator.rate}</span><button>${generator.baseCost}</button>
-				</div>
-			</c:forEach>
+		<game-counter></game-counter>
+		<game-button></game-button>	
+
+		<div class="container">
+			<game-generator data-id="0"></game-generator>
+			<game-generator data-id="1"></game-generator>
+			<game-generator data-id="2"></game-generator>
 		</div>
+		
 	</main>
-	<script>
-    	window.incrementalGame = {
-	        state: {
-	            counter: 0
-	          
-	        }
-		}
-    	window.incrementalGame.state = ${jsonString}; // where state is passed from Controller as JSON string
-	</script>
-	
-	<script src="<c:url value='/app.js' />"></script>
-
 
 	<footer><span>&copy; 2018 Neil Manimtim</span></footer>
-	
+
+	<script src='app.js'>
+    	window.incrementalGame.state.generators.forEach(g =>
+    		var node = document.createElement(li);
+    		node.textContent(g.name);
+    		document.querySelector(ul).appendChild(node);
+    	);
+	</script>
+
 </body>
