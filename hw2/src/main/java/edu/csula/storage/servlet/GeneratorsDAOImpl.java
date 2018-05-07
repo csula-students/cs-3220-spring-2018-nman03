@@ -1,14 +1,14 @@
 package edu.csula.storage.servlet;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
-import edu.csula.storage.EventsDAO;
-import edu.csula.models.Event;
+import edu.csula.storage.GeneratorsDAO;
+import edu.csula.models.Generator;
 
 /**
  * To abstract the storage access from the business layer using ServletContext
@@ -30,29 +30,28 @@ import edu.csula.models.Event;
  * }
  * ```
  */
-public class EventsDAOImpl implements EventsDAO {
+public class GeneratorsDAOImpl implements GeneratorsDAO {
 	private final ServletContext context;
-	protected static final String CONTEXT_NAME = "events";
+	protected static final String CONTEXT_NAME = "generators";
 
-	public EventsDAOImpl(ServletContext context) {
+	public GeneratorsDAOImpl(ServletContext context) {
 		this.context = context;
 	}
 
 	@Override
-	public List<Event> getAll() {
+	public List<Generator> getAll() {
 		Object data = context.getAttribute(CONTEXT_NAME);
+
 		if (data == null) {
 			return new ArrayList<>();
 		}
 
-		return (List<Event>) data;
+		return (List<Generator>) data;
 	}
 
 	@Override
-	public Optional<Event> getById(int id) {
-		// TODO: get a certain event given its id from context (see getAll() on
-		// getting a list first and get a certain one from the list)
-		List<Event> list = getAll();
+	public Optional<Generator> getById(int id) {
+		List<Generator> list = getAll();
 
 		for (int i = 0 ; i < list.size() ; i++) {
 			if (list.get(i).getId() == id) {
@@ -63,31 +62,30 @@ public class EventsDAOImpl implements EventsDAO {
 	}
 
 	@Override
-	public void set(int id, Event event) {
-		List<Event> list = getAll();
+	public void set(int id, Generator generator) {
+		List<Generator> list = getAll();
 		
 		
 		for (int i = 0 ; i < list.size() ; i++) {
 			if (list.get(i).getId() == id) {
-				list.set(i, event);
+				list.set(i, generator);
 			}
 		}
 		
-		context.setAttribute(CONTEXT_NAME, list);
-		
+		context.setAttribute(CONTEXT_NAME, list);	
 	}
 
 	@Override
-	public void add(Event event) {
-		List<Event> list = getAll();
-		list.add(event);
+	public void add(Generator generator) {
+		List<Generator> list = getAll();
+		list.add(generator);
 		
-		context.setAttribute(CONTEXT_NAME, list);
+		context.setAttribute(CONTEXT_NAME, list);	
 	}
 
 	@Override
 	public void remove(int id) {
-		List<Event> list = getAll();
+		List<Generator> list = getAll();
 
 		for (int i = 0 ; i < list.size() ; i++) {
 			if (list.get(i).getId() == id) {
@@ -95,6 +93,5 @@ public class EventsDAOImpl implements EventsDAO {
 			}
 		}
 		
-		context.setAttribute(CONTEXT_NAME, list);
-	}
+		context.setAttribute(CONTEXT_NAME, list);	}
 }
