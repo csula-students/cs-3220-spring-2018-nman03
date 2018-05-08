@@ -32,10 +32,6 @@ li:last-child {
 	border-right: none;
 }
 
-a.events {
-	font-weight: bold;
-}
-
 a:visited {
 	color: blue;
 }
@@ -118,11 +114,12 @@ th {
 	color: white;
 	background-color: black;
 	margin-bottom: 1em;
-	max-height: 3em;
+	max-height: 4em;
+	min-height: 4em;
 	overflow-y: auto;
 }
 
-.story > p {
+.story > game-story-book > p {
 	margin: 0;
 	padding: 0;
 

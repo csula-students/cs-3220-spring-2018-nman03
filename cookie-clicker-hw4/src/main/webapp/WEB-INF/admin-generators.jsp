@@ -2,9 +2,11 @@
 
 
 <link rel='stylesheet' type='text/css' href="/app.css" />
+<link href="https://fonts.googleapis.com/css?family=Kavivanar" rel="stylesheet">
+
 <h1>Incremental Game Framework</h1>
 <ul>
-   <li><a href="/admin">Game Information</a></li>
+   <li><a href="/game">Game Information</a></li>
    <li ><a href="/admin/generators">Generators</a></li>
    <li ><a href="/admin/events">Events</a></li>
 </ul>
