@@ -26,11 +26,11 @@
    </div>
    <table>
       <tr>
-         <td>Name</td>
-         <td>Rate</td>
-         <td>Cost</td>
-         <td>Unlock At</td>
-         <td>Action</td>
+         <th>Name</th>
+         <th>Rate</th>
+         <th>Cost</th>
+         <th>Unlock At</th>
+         <th>Action</th>
       </tr>
       <c:forEach items="${generators}" var="generator">
             <tr>

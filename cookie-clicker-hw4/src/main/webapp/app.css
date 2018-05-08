@@ -67,7 +67,7 @@ table {
 }
 
 
-table, td {
+table, td, th {
 	text-align: left;
 	padding: .5em;
 }

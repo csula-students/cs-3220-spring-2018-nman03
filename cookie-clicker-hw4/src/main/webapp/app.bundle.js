@@ -87,13 +87,14 @@ class Generator {
   * @param {object} meta - meta object for constructing generator
   */
 	constructor(meta) {
-		this.type = meta.type;
+		//this.type = meta.type;
+		this.id = meta.id;
 		this.name = meta.name;
 		this.description = meta.description;
 		this.rate = meta.rate;
-		this.quantity = meta.quantity;
+		this.quantity = 1;
 		this.baseCost = meta.baseCost;
-		this.unlockValue = meta.unlockValue;
+		this.unlockAt = meta.unlockAt;
 	}
 
 	/**
@@ -229,7 +230,7 @@ main();
 function main() {
 	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
-		//example: 'Hello custom element',
+		example: 'Hello custom element',
 		counter: 0,
 		generators: [{
 			type: 'autonomous',
@@ -276,6 +277,7 @@ function main() {
 			state: 'hidden'
 		}]
 	};
+	
 
 	// initialize store
 	const store = new _store2.default(_reducer2.default, initialState);

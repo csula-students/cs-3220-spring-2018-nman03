@@ -21,10 +21,10 @@
     </div>
     <table>
         <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Trigger At</td>
-            <td>Action</td>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Trigger At</th>
+            <th>Action</th>
         </tr>
         <c:forEach items="${events}" var="event">
             <tr>

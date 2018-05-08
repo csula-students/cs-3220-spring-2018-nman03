@@ -48,7 +48,7 @@ public class GameServlet extends HttpServlet {
 		private ArrayList<Event> events;
 
 		public DTO(ArrayList<Generator> generators, ArrayList<Event> events) {
-			this.generators = new ArrayList<Generator>;
+			this.generators = generators;
 			this.events = events;
 		}
 
