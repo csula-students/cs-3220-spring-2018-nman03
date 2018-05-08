@@ -25,13 +25,17 @@ public class AdminGeneratorsServlet extends HttpServlet {
 		
 		request.setAttribute("generators", generators);
 
-		if (request.getParameter("id") != null) {
-			int index = retrieveIndex(Integer.parseInt(request.getParameter("id")));
+		String idStr = request.getParameter("id");
+
+		if (idStr != null) {
+			int index = retrieveIndex(safeParseInt(idStr));
 			request.setAttribute("index", index);
 		}
 
-		if (request.getParameter("deleteId") != null) {
-			int id = Integer.parseInt(request.getParameter("deleteId"));
+		String deleteId = request.getParameter("deleteId");
+
+		if (deleteId != null) {
+			int id = safeParseInt(deleteId);
 			dao.remove(id);
 			response.sendRedirect("generators");
 
@@ -40,7 +44,6 @@ public class AdminGeneratorsServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/WEB-INF/admin-generators.jsp").forward(request, response);
 	}
-
 
 	@Override
 	public void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,20 +59,20 @@ public class AdminGeneratorsServlet extends HttpServlet {
 		String idStr = request.getParameter("id");
 
 		if (idStr != null) {
-			int id = Integer.parseInt(idStr);
+			int id = safeParseInt(idStr);
 
-			Generator generator = dao.getById(id).get();
+			Generator generator = generators.get(retrieveIndex(id));
 			generator.setName(name);
 			generator.setDescription(description);
-			generator.setRate(Integer.parseInt(rate));
-			generator.setBaseCost(Integer.parseInt(baseCost));
-			generator.setUnlockAt(Integer.parseInt(unlockAt));
+			generator.setRate(safeParseInt(rate));
+			generator.setBaseCost(safeParseInt(baseCost));
+			generator.setUnlockAt(safeParseInt(unlockAt));
 			dao.set(id, generator);
 		}
 
 		else {
-			Generator generator = new Generator(dao.getAll().size(), name, description, Integer.parseInt(rate), 
-				Integer.parseInt(baseCost), Integer.parseInt(unlockAt));
+			Generator generator = new Generator(dao.getAll().size(), name, description, safeParseInt(rate), 
+				safeParseInt(baseCost), safeParseInt(unlockAt));
 			dao.add(generator);
 		}
 
@@ -87,5 +90,12 @@ public class AdminGeneratorsServlet extends HttpServlet {
 		}
 
 		return -1;
+	}
+
+	public static Integer safeParseInt(String text) {
+		if (!text.isEmpty()) {
+			return Integer.parseInt(text);
+		}
+		return 0;
 	}
 }

@@ -23,13 +23,17 @@ public class AdminEventsServlet extends HttpServlet {
 		
 		request.setAttribute("events", events);
 
-		if (request.getParameter("id") != null) {
-			int index = retrieveIndex(Integer.parseInt(request.getParameter("id")));
+		String idStr = request.getParameter("id");
+
+		if (idStr != null) {
+			int index = retrieveIndex(Integer.parseInt(idStr));
 			request.setAttribute("index", index);
 		}
 
-		if (request.getParameter("deleteId") != null) {
-			int id = Integer.parseInt(request.getParameter("deleteId"));
+		String deleteId = request.getParameter("deleteId");
+
+		if (deleteId != null) {
+			int id = Integer.parseInt(deleteId);
 			dao.remove(id);
 			response.sendRedirect("events");
 
@@ -54,15 +58,15 @@ public class AdminEventsServlet extends HttpServlet {
 		if (idStr != null) {
 			int id = Integer.parseInt(idStr);
 
-			Event event = dao.getById(id).get();
+			Event event = events.get(retrieveIndex(id));
 			event.setName(name);
 			event.setDescription(description);
-			event.setTriggerAt(Integer.parseInt(triggerAt));
+			event.setTriggerAt(safeParseInt(triggerAt));
 			dao.set(id, event);
 		}
 
 		else {
-			Event event = new Event(dao.getAll().size(), name, description, Integer.parseInt(triggerAt));
+			Event event = new Event(dao.getAll().size(), name, description, safeParseInt(triggerAt));
 			dao.add(event);
 		}
 
@@ -80,5 +84,12 @@ public class AdminEventsServlet extends HttpServlet {
 		}
 
 		return -1;
+	}
+
+	public static Integer safeParseInt(String text) {
+		if (!text.isEmpty()) {
+			return Integer.parseInt(text);
+		}
+		return 0;
 	}
 }
