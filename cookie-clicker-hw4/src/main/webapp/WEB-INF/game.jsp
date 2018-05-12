@@ -31,7 +31,7 @@
 		<game-counter></game-counter>
 		<game-button></game-button>	
 
-		<div class="container">
+		<div class="gen-container">
 			<game-generator data-id="0"></game-generator>
 			<game-generator data-id="1"></game-generator>
 			<game-generator data-id="2"></game-generator>

@@ -1137,7 +1137,7 @@ exports.default = function (store) {
 
 			for (var i = 0; i < newState.story.length; i++) {
 				if (newState.story[i].state == 'visible') {
-					storyOut += `<p>${newState.story[i].description}</p>`;
+					storyOut += `<p>${newState.story[i].name}</p>`;
 				}
 			}
 
