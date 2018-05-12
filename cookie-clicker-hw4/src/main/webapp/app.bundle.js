@@ -87,14 +87,13 @@ class Generator {
   * @param {object} meta - meta object for constructing generator
   */
 	constructor(meta) {
-		//this.type = meta.type;
-		this.id = meta.id;
+		this.type = meta.type;
 		this.name = meta.name;
 		this.description = meta.description;
 		this.rate = meta.rate;
-		this.quantity = 1;
+		this.quantity = meta.quantity;
 		this.baseCost = meta.baseCost;
-		this.unlockAt = meta.unlockAt;
+		this.unlockValue = meta.unlockValue;
 	}
 
 	/**
@@ -229,55 +228,7 @@ main();
 // main function wraps everything at top level
 function main() {
 	// TODO: fill the blank based on the theme you have choosen
-	const initialState = {
-		example: 'Hello custom element',
-		counter: 0,
-		generators: [{
-			type: 'autonomous',
-			name: 'Adventurer',
-			description: 'This Solo Adventurer will be able to earn enough 1 gold every second',
-			rate: 1,
-			baseCost: 10,
-			quantity: 0,
-			unlockValue: 10
-
-		}, {
-			type: 'autonomous',
-			name: 'Raid Team',
-			description: 'This team of experienced fighters will be able to amass 10 gold every second',
-			rate: 10,
-			baseCost: 100,
-			quantity: 0,
-			unlockValue: 100
-
-		}, {
-			type: 'autonomous',
-			name: 'Dungeon Champion',
-			description: 'This OP character can defeat several bosses per run without using a single HP potion, allowing him to earn 100 gold every second',
-			rate: 100,
-			baseCost: 1000,
-			quantity: 0,
-			unlockValue: 1000
-
-		}],
-		story: [{
-			name: 'Respected',
-			description: 'You are now a Respected Dungeoneer, you can now hire an adventurer to do the looting for you.',
-			triggeredAt: 10,
-			state: 'hidden'
-		}, {
-			name: 'Famous',
-			description: 'Your name echoes throughout the lands, tales of your adventure are sung in many taverns',
-			triggeredAt: 200,
-			state: 'hidden'
-		}, {
-			name: 'Kingpin',
-			description: 'You have achieved the title of Dungeon Kingpin, adventurers seek your advice, monster fear your name, and gold is nothing but number',
-			triggeredAt: 2000,
-			state: 'hidden'
-		}]
-	};
-	
+	const initialState = window.incrementalGame.state;
 
 	// initialize store
 	const store = new _store2.default(_reducer2.default, initialState);
@@ -947,7 +898,7 @@ class Story {
 	constructor(meta) {
 		this.name = meta.name;
 		this.description = meta.description;
-		this.triggeredAt = meta.triggeredAt;
+		this.triggerAt = meta.triggerAt;
 		this.state = meta.state;
 	}
 
@@ -957,7 +908,7 @@ class Story {
   * @return {boolean} if this story is unlockable
   */
 	isUnlockYet(value) {
-		if (value >= this.triggeredAt && this.state == 'hidden') {
+		if (value >= this.triggerAt && this.state == 'hidden') {
 			return true;
 		}
 

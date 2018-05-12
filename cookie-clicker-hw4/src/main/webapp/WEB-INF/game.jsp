@@ -1,12 +1,19 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
 	<meta charset="UTF-8">
 	<title>Dungeon Crawler</title>
-	<link href="app.css" rel="stylesheet">
+	<link href='<c:url value="/app.css" />' rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kavivanar" rel="stylesheet">
-	<script src="/app.bundle.js"></script>
-
 	<script type="text/javascript">
-		window.incrementalGame.state: ${state};
+		window.incrementalGame = {};
+		window.incrementalGame.state = ${state};
+		window.incrementalGame.state.generators.forEach(g =>
+			g.quantity = 0
+		);
+		window.incrementalGame.state.story.forEach(s =>
+			s.state = 'hidden'
+		);
 	</script>
 
 </head>
@@ -31,7 +38,7 @@
 		</div>
 	</main>
 
-	<footer><span>&copy; 2018 Neil Manimtim</span></footer>
-	<script src="/app.bundle.js"></script>
+	<script src='<c:url value="/app.bundle.js" />'></script>
 
+	<footer><span>&copy; 2018 Neil Manimtim</span></footer>
 </body>

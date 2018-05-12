@@ -26,12 +26,12 @@ public class GameServlet extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		EventsDAO dao = new EventsDAOImpl(new Database());
-		ArrayList<Event> events = (ArrayList<Event>) dao.getAll();
+		ArrayList<Event> story = (ArrayList<Event>) dao.getAll();
 
 		GeneratorsDAO gdao = new GeneratorsDAOImpl(new Database());
 		ArrayList<Generator> generators = (ArrayList<Generator>) gdao.getAll();
 
-		DTO dto = new DTO(generators, events);
+		DTO dto = new DTO(generators, story);
 
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
@@ -45,11 +45,13 @@ public class GameServlet extends HttpServlet {
 
 	class DTO {
 		private ArrayList<Generator> generators;
-		private ArrayList<Event> events;
+		private ArrayList<Event> story;
+		private int counter;
 
-		public DTO(ArrayList<Generator> generators, ArrayList<Event> events) {
+		public DTO(ArrayList<Generator> generators, ArrayList<Event> story) {
 			this.generators = generators;
-			this.events = events;
+			this.story = story;
+			this.counter = 0;
 		}
 
 		public ArrayList<Generator> getGenerators() {
@@ -57,7 +59,7 @@ public class GameServlet extends HttpServlet {
 		}
 
 		public ArrayList<Event> getEvents() {
-			return this.events;
+			return this.story;
 		}
 	}
 }

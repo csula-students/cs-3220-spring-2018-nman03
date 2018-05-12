@@ -138,6 +138,7 @@ th {
 game-generator {
 	border: 1px solid black;
 	max-width: 15em;
+	min-width: 10em;
 	margin: 1em;
 	padding: .5em;
 }
