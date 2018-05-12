@@ -1,14 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<link rel='stylesheet' type='text/css' href="/app.css" />
+<link rel='stylesheet' type='text/css' href='<c:url value="/app.css" />' />
 <link href="https://fonts.googleapis.com/css?family=Kavivanar" rel="stylesheet">
 
 <h1>Incremental Game Framework</h1>
 <ul>
-   <li><a href="/game">Game Information</a></li>
-   <li ><a href="/admin/generators">Generators</a></li>
-   <li ><a href="/admin/events">Events</a></li>
+   <li><a href='<c:url value="/game" />'>Game Information</a></li>
+    <li ><a href='<c:url value="/admin/generators" />'>Generators</a></li>
+    <li ><a href='<c:url value="/admin/events" />'>Events</a></li>
 </ul>
 <div class='container'>
    <div class='left'>
