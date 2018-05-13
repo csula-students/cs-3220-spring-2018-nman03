@@ -130,7 +130,7 @@ th {
 }
 
 
-.gen-container {
+#gen-container {
 	display: flex;
 	justify-content: center;
 }
