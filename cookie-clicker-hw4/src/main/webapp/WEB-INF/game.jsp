@@ -36,9 +36,8 @@
 		window.incrementalGame.state.story.forEach(s =>
 			s.state = 'hidden'
 		);
-		console.log(window.incrementalGame.state.generators);
 	</script>
-		
+
 	<script src='<c:url value="/app.bundle.js" />'></script>
 
 	<footer><span>&copy; 2018 Neil Manimtim</span></footer>

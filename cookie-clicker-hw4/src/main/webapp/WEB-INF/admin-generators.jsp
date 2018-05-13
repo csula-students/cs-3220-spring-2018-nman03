@@ -15,7 +15,7 @@
          <input name='generatorName' id='name' value="<c:if test='${index != null}'>${generators.get(index).name}</c:if>" type='text' /><br>
          <label for='rate'>Generator Rate</label><br>
          <input name='generatorRate' id='rate' value="<c:if test='${index != null}'>${generators.get(index).rate}</c:if>" type='text' /><br>
-         <label for='cost'>Unlock At</label><br>
+         <label for='cost'>Generator Cost</label><br>
          <input name='generatorBaseCost' id='baseCost' value="<c:if test='${index != null}'>${generators.get(index).baseCost}</c:if>" type='text' /><br>
          <label for='unlockAt'>Unlock At</label><br>
          <input name='generatorUnlockAt' id='unlockAt' value="<c:if test='${index != null}'>${generators.get(index).unlockAt}</c:if>" type='text' /><br>
