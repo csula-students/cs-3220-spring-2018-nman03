@@ -6,10 +6,6 @@ h1 {
 	font-weight: normal;
 }
 
-html {
-	background-color: skyblue;
-}
-
 li {
 	display: inline;
 	border-right: 1px solid black;
@@ -35,12 +31,21 @@ div.container {
 input {
 	padding: .5em;
 	border: 2px solid black;
+	margin: .5em;
 }
 
-input.eventdescription {
-	width: 20em;;
+
+
+textarea {
+	width: 40em;
 	height: 15em;
 	box-sizing: border-box;
+	border: 2px solid black;
+	margin: .5em;
+}
+
+label {
+	margin: .5em;
 }
 
 button {
@@ -56,10 +61,35 @@ div.left {
 	margin-right: 10px;
 }
 
-table, th, td {
+table {
+	border-collapse: collapse;
+}
+
+
+table, td {
 	text-align: left;
 	padding: .5em;
 }
+
+
+div.name {
+	max-width: 15em;
+	max-height: 2em;
+	min-height: 1em;
+	white-space: nowrap;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+}
+
+div.description {
+	max-width: 4em;
+	text-overflow: ellipsis;
+	max-height: 2em;
+	min-height: 1em;
+	white-space: nowrap;
+  	overflow: hidden;
+}
+
 
 tr:nth-child(even) {
 	background-color: #fff;
